@@ -1,4 +1,18 @@
-/* 1. RESET & DASAR */
+/* ==========================================================================
+   1. PENYETELAN UTAMA & VARIABEL WARNA PREMIUM
+   ========================================================================== */
+:root {
+    --primary: #0645ad;
+    --primary-dark: #032d75;
+    --gold: #d4af37;
+    --gold-glow: rgba(212, 175, 55, 0.4);
+    --dark: #0f172a;
+    --light-bg: #f8fafc;
+    --card-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    --card-hover-shadow: 0 20px 40px rgba(6, 69, 173, 0.15);
+    --font-main: 'Plus Jakarta Sans', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,32 +24,68 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333333;
+    font-family: var(--font-main);
+    color: #334155;
     line-height: 1.6;
     background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* Kustomisasi Scrollbar Laptop */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
 }
 
 .container {
-    max-width: 1080px;
+    max-width: 1140px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
 .text-center { text-align: center; }
 .text-white { color: #ffffff !important; }
+.text-gold { color: var(--gold) !important; }
 
-/* 2. STICKY NAVBAR DENGAN LOGO 1:1 */
+/* Styling Judul Section */
+.section-title {
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 45px;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+}
+.title-dot {
+    color: var(--primary);
+    font-size: 40px;
+    line-height: 0;
+}
+
+/* ==========================================================================
+   2. GLASSMORPHISM NAVBAR (EFEK KACA NAVIGASI)
+   ========================================================================== */
 .navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #0f172a;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    padding: 16px 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .brand-box {
@@ -44,307 +94,461 @@ body {
     gap: 12px;
 }
 
-/* Kunci Logo 1:1 */
 .brand-logo {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     aspect-ratio: 1/1;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
+    border: 2px solid var(--gold);
 }
 
 .brand-name {
     color: #ffffff;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 28px;
 }
 
 .nav-links a {
-    color: #cbd5e1;
+    color: #94a3b8;
     text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-.nav-links a:hover { color: #38bdf8; }
+.nav-links a:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
 
 .btn-nav {
-    background-color: #2563eb;
+    background: linear-gradient(135deg, var(--primary), #1e62d0);
     color: #ffffff !important;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: bold;
+    padding: 10px 22px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(6, 69, 173, 0.3);
 }
 
-/* 3. SECTION 1: PURE CSS CAROUSEL DENGAN SCROLL-SNAP */
-.carousel-container {
-    width: 100%;
+.btn-nav:hover {
+    background: linear-gradient(135deg, #1e62d0, var(--primary));
+    box-shadow: 0 6px 20px rgba(6, 69, 173, 0.5);
+}
+
+/* ==========================================================================
+   3. HERO PURE CSS AUTO-SLIDER 3D EFFECTS
+   ========================================================================== */
+.promo-section {
+    padding: 80px 0;
+    background: radial-gradient(circle at top left, #f8fafc, #edf2f7);
     overflow: hidden;
-    background-color: #000000;
 }
 
-.carousel-slide {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-.carousel-slide::-webkit-scrollbar {
-    height: 6px;
-}
-
-.carousel-slide::-webkit-scrollbar-thumb {
-    background: #38bdf8;
-    border-radius: 4px;
-}
-
-.carousel-item {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
+.slider-wrapper {
     position: relative;
+    max-width: 1050px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
 }
 
-.carousel-item img {
+.slider-track {
+    display: flex;
+    width: 300%;
+    animation: sliderAnimasi 14s infinite cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.slider-track:hover {
+    animation-play-state: paused;
+}
+
+.promo-slide {
+    width: 33.333%;
+    padding: 0 10px;
+}
+
+.promo-card {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 420px;
+}
+
+@media (min-width: 768px) {
+    .promo-card { flex-direction: row; }
+    .promo-img-wrapper, .promo-content { flex: 1; }
+}
+
+.promo-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-height: 320px;
+}
+
+.promo-img {
     width: 100%;
-    height: 450px;
+    height: 100%;
     object-fit: cover;
-    display: block;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.carousel-caption {
+.promo-card:hover .promo-img {
+    transform: scale(1.06) rotate(1deg);
+}
+
+.promo-badge {
     position: absolute;
-    bottom: 30px;
-    left: 40px;
-    background: rgba(15, 23, 42, 0.75);
-    color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-size: 22px;
-    font-weight: bold;
+    top: 24px;
+    left: 24px;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    border-radius: 30px;
 }
 
-/* 4. SECTION UMUM */
-.section { padding: 60px 0; }
-.section-bg { background-color: #f8fafc; }
-.section-title {
-    font-size: 26px;
-    text-align: center;
-    margin-bottom: 35px;
-    color: #0f172a;
+.promo-content {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffffff, #fdfdfd);
 }
 
-/* 5. SECTION 2: PRODUK TERLARIS */
+.promo-subtitle {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.promo-content h3 {
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+}
+
+.promo-content p {
+    color: #64748b;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-promo {
+    align-self: flex-start;
+    padding: 14px 32px;
+    background: var(--dark);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.btn-promo:hover {
+    background: transparent;
+    color: var(--dark);
+    border-color: var(--dark);
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   4. PRODUK TERLARIS (PREMIUM BOUNCING DESIGN)
+   ========================================================================== */
+.section { padding: 90px 0; }
+.section-bg { background-color: var(--light-bg); }
+
 .bestseller-card {
     display: flex;
+    gap: 50px;
     align-items: center;
-    gap: 35px;
     background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 32px;
+    padding: 45px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid #f1f5f9;
+}
+
+.bestseller-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.bestseller-img-container {
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.04);
 }
 
 .bestseller-img {
     width: 320px;
     height: 320px;
     object-fit: cover;
-    border-radius: 10px;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.bestseller-card:hover .bestseller-img {
+    transform: scale(1.05);
 }
 
 .badge {
-    background: #fef08a;
-    color: #854d0e;
+    background: rgba(6, 69, 173, 0.08);
+    color: var(--primary);
     font-size: 12px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 20px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 30px;
+    margin-bottom: 16px;
     display: inline-block;
-    margin-bottom: 10px;
 }
 
 .bestseller-info h3 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #0f172a;
-    margin: 8px 0;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark);
 }
 
 .price {
-    font-size: 20px;
-    font-weight: bold;
-    color: #2563eb;
-    margin-bottom: 10px;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 12px 0 20px 0;
 }
 
 .desc {
-    color: #475569;
+    color: #64748b;
     font-size: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .btn-primary {
     display: inline-block;
-    background: #2563eb;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: #ffffff;
-    padding: 10px 22px;
-    border-radius: 6px;
+    padding: 14px 30px;
+    border-radius: 30px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(6, 69, 173, 0.25);
+    transition: all 0.3s ease;
 }
 
-/* 6. SECTION 3: GALERI 4 GAMBAR */
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(6, 69, 173, 0.4);
+}
+
+@media (max-width: 768px) {
+    .bestseller-card { flex-direction: column; padding: 30px; text-align: center; }
+    .bestseller-img { width: 100%; height: 260px; }
+}
+
+/* ==========================================================================
+   5. GALERI & ARTIKEL MODERN RESIZING CARDS
+   ========================================================================== */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 30px;
 }
 
 .gallery-card {
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 20px;
     overflow: hidden;
-    border: 1px solid #e2e8f0;
+    box-shadow: var(--card-shadow);
     text-align: center;
-    padding-bottom: 15px;
+    padding-bottom: 24px;
+    transition: all 0.3s ease;
+    border: 1px solid #f1f5f9;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.gallery-img-box {
+    overflow: hidden;
+    height: 220px;
 }
 
 .gallery-card img {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
+
+.gallery-card:hover img { transform: scale(1.08); }
 
 .gallery-card h4 {
-    margin-top: 12px;
+    margin-top: 18px;
     font-size: 16px;
-    color: #0f172a;
+    font-weight: 700;
+    color: var(--dark);
 }
 
-/* 7. SECTION 4: 2 ARTIKEL PRESTASI */
+/* Bagian Artikel */
 .articles-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 30px;
 }
 
 .article-card {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
+    border-radius: 24px;
     overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+}
+
+.article-card:hover {
+    box-shadow: var(--card-hover-shadow);
+}
+
+.article-img-box {
+    overflow: hidden;
+    height: 200px;
 }
 
 .article-img {
     width: 100%;
-    height: 180px;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.article-body { padding: 20px; }
+.article-card:hover .article-img { transform: scale(1.05); }
+
+.article-body { padding: 30px; }
+
 .article-date {
     font-size: 12px;
-    color: #64748b;
-    margin-bottom: 6px;
+    font-weight: 700;
+    color: #94a3b8;
     display: block;
+    margin-bottom: 8px;
 }
 
 .article-body h3 {
     font-size: 18px;
-    color: #0f172a;
-    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--dark);
+margin-bottom: 12px;
+line-height: 1.4;
 }
-
-.article-body p {
-    color: #475569;
-    font-size: 14px;
-}
-
-/* 8. SECTION 5: CARA BELI (ORDER) */
+.article-body p { color: #64748b; font-size: 14px; }
+/* ==========================================================================
+6. LANGKAH ORDER & FOOTER GRADASI EFEK PREMIUM
+========================================================================== */
 .section-order {
-    background-color: #0f172a;
-    color: #ffffff;
+background: linear-gradient(135deg, #0a192f, var(--dark));
+color: #ffffff;
+position: relative;
 }
-
 .steps-grid {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    margin-bottom: 35px;
+display: flex;
+justify-content: center;
+gap: 30px;
+flex-wrap: wrap;
+margin: 50px 0;
 }
-
 .step-box {
-    background: #1e293b;
-    padding: 25px;
-    border-radius: 10px;
-    flex: 1 1 250px;
-    max-width: 300px;
-    text-align: center;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(255, 255, 255, 0.06);
+padding: 40px 30px;
+border-radius: 24px;
+flex: 1 1 280px;
+max-width: 340px;
+backdrop-filter: blur(5px);
+transition: all 0.3s ease;
 }
-
+.step-box:hover {
+background: rgba(255, 255, 255, 0.06);
+transform: translateY(-5px);
+border-color: var(--gold);
+}
 .step-num {
-    width: 40px;
-    height: 40px;
-    background: #38bdf8;
-    color: #0f172a;
-    border-radius: 50%;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 15px auto;
+font-size: 36px;
+font-weight: 800;
+color: var(--gold);
+margin-bottom: 15px;
+font-family: inherit;
+text-shadow: 0 0 15px var(--gold-glow);
 }
-
-.step-box h4 {
-    font-size: 16px;
-    margin-bottom: 8px;
-}
-
-.step-box p {
-    color: #94a3b8;
-    font-size: 14px;
-}
-
+.step-box h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+.step-box p { color: #94a3b8; font-size: 14px; }
 .cta-actions {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
+display: flex;
+gap: 20px;
+justify-content: center;
+flex-wrap: wrap;
 }
-
 .btn-whatsapp {
-    background: #16a34a;
-    color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
+background: linear-gradient(135deg, #25d366, #128c7e);
+color: #ffffff;
+padding: 14px 32px;
+border-radius: 30px;
+text-decoration: none;
+font-weight: 700;
+box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+transition: all 0.3s ease;
 }
-
+.btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5); }
 .btn-marketplace {
-    background: #ea580c;
-    color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
+background: linear-gradient(135deg, #ea580c, #c2410c);
+color: #ffffff;
+padding: 14px 32px;
+border-radius: 30px;
+text-decoration: none;
+font-weight: 700;
+box-shadow: 0 5px 15px rgba(234, 88, 12, 0.3);
+transition: all 0.3s ease;
 }
-
-/* 9. FOOTER */
+.btn-marketplace:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(234, 88, 12, 0.5); }
+/* Footer */
 .footer {
-    background: #020617;
-    color: #64748b;
-    text-align: center;
-    padding: 25px 0;
-    font-size: 14px;
+background: #070f1e;
+color: #475569;
+text-align: center;
+padding: 30px 0;
+font-size: 13px;
+font-weight: 600;
+border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+/* ==========================================================================
+7. TIMELINE PERSENTASE ANIMASI CAROUSEL (3 SLIDE)
+========================================================================== */
+@keyframes sliderAnimasi {
+0%, 25% { transform: translateX(0); }
+30%, 55% { transform: translateX(-33.333%); }
+60%, 85% { transform: translateX(-66.666%); }
+100% { transform: translateX(0); }
 }
